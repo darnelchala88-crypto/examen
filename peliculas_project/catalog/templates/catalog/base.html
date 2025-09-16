@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Películas</title>
+</head>
+<body>
+  <nav>
+    {% if user.is_authenticated %}
+      <span>Hola {{ user.username }}</span>
+      <a href="{% url 'movie_list' %}">Películas</a>
+      <a href="{% url 'movie_create' %}">Agregar película</a>
+      <a href="{% url 'logout' %}">Salir</a>
+    {% else %}
+      <a href="{% url 'login' %}">Entrar</a>
+      <a href="{% url 'register' %}">Registrarse</a>
+    {% endif %}
+  </nav>
+  <hr>
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</body>
+</html>
